@@ -4,256 +4,370 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alexander Strunkin</title>
+  <meta name="description" content="Alexander Strunkin — founder, product leader, and 0→1 builder. Five startups as founder or early employee, a dozen more backed." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #fafaf8;
-      --text: #1a1a1a;
-      --muted: #6b6b6b;
-      --accent: #2a2a2a;
-      --border: #e8e8e4;
-      --link-hover: #3a3a3a;
+      /* ── Broadsheet palette ── */
+      --paper: #f6f1e7;      /* warm ivory */
+      --ink:   #211d18;      /* near-black, warm */
+      --muted: #6a6153;      /* AA on paper */
+      --faint: #8f8676;      /* labels / captions */
+      --line:  #d8cfbd;      /* hairline rules */
+      --blood: #8a2b22;      /* editorial oxblood — the only color */
+
+      /* ── Type scale (Fraunces display · Hanken body) ── */
+      --fs-name:      clamp(2.3rem, 5.2vw, 3.3rem);
+      --fs-standfirst:clamp(1.35rem, 2.2vw, 1.6rem);
+      --fs-proof:     1.18rem;
+      --fs-body:      1.06rem;
+      --fs-secondary: 0.96rem;
+      --fs-small:     0.85rem;
+      --fs-label:     0.74rem;
+
+      /* ── Spacing (8px base) ── */
+      --sp-1: 8px;  --sp-2: 16px; --sp-3: 24px; --sp-4: 32px;
+      --sp-5: 40px; --sp-6: 48px; --sp-7: 64px; --sp-8: 80px; --sp-9: 112px;
+
+      --serif: 'Fraunces', Georgia, serif;
+      --sans:  'Hanken Grotesk', system-ui, sans-serif;
+      --measure: 37rem;
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 24px;
+      padding: 0 var(--sp-4);
     }
 
-    /* ── Layout ── */
     .container {
       width: 100%;
-      max-width: 680px;
-      padding: 80px 0 100px;
+      max-width: 760px;
+      padding: var(--sp-7) 0 var(--sp-8);
     }
 
-    /* ── Hero ── */
-    .hero {
+    /* Reading measure for prose blocks */
+    .lede, .synthesis, .bridge, .bio, .book-desc { max-width: var(--measure); }
+
+    /* Shared quiet label */
+    .label {
+      font-family: var(--sans);
+      font-size: var(--fs-label);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blood);
+    }
+
+    /* ── Masthead ── */
+    .masthead {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 40px;
-      margin-bottom: 72px;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--sp-4);
+      padding-bottom: var(--sp-3);
+      border-bottom: 2px solid var(--ink);
     }
 
-    .hero-inner {
-      display: flex;
-      align-items: flex-start;
-      gap: 36px;
-    }
-
-    .photo-wrap {
-      flex-shrink: 0;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid var(--border);
-    }
-
-    .photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .hero-text {
-      padding-top: 4px;
-    }
-
-    .hero-text h1 {
-      font-family: 'Lora', serif;
-      font-size: 2rem;
+    .masthead h1 {
+      font-family: var(--serif);
+      font-optical-sizing: auto;
       font-weight: 500;
+      font-size: var(--fs-name);
+      line-height: 0.98;
       letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 8px;
+      margin-bottom: var(--sp-2);
     }
 
     .tagline {
-      font-size: 0.95rem;
+      font-family: var(--sans);
+      font-size: var(--fs-label);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .portrait {
+      flex-shrink: 0;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+
+    /* ── Lede / standfirst ── */
+    .lede { padding-top: var(--sp-6); }
+
+    .lede .standfirst {
+      font-family: var(--serif);
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-size: var(--fs-standfirst);
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: var(--sp-3);
+    }
+
+    .lede .standfirst .hl {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--blood);
+      white-space: nowrap;
+    }
+
+    .lede p:last-child {
+      font-size: var(--fs-body);
+      line-height: 1.7;
       color: var(--muted);
       font-weight: 400;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      font-size: 0.78rem;
     }
 
-    /* ── Bio ── */
-    .bio {
-      border-top: 1px solid var(--border);
-      padding-top: 40px;
-      margin-bottom: 56px;
+    /* ── Proof — light bullet list ── */
+    .proof {
+      list-style: none;
+      margin-top: var(--sp-7);
+      max-width: var(--measure);
     }
+
+    .proof li {
+      position: relative;
+      padding-left: var(--sp-3);
+      margin-bottom: var(--sp-3);
+      font-size: var(--fs-secondary);
+      line-height: 1.6;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .proof li:last-child { margin-bottom: 0; }
+
+    .proof li::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 0.66em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blood);
+    }
+
+    .proof-name {
+      font-family: var(--serif);
+      font-optical-sizing: auto;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Synthesis + CTA ── */
+    .synthesis {
+      margin-top: var(--sp-7);
+      font-size: var(--fs-body);
+      line-height: 1.7;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    .cta-row { margin-top: var(--sp-5); }
+
+    .cta {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.4rem;
+      color: var(--blood);
+      text-decoration: none;
+      border-bottom: 2px solid var(--blood);
+      padding-bottom: 3px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .cta .arrow { display: inline-block; font-style: normal; transition: transform 0.2s ease; }
+    .cta:hover { color: var(--ink); border-color: var(--ink); }
+    .cta:hover .arrow { transform: translateX(4px); }
+
+    /* ── Bridge / seam ── */
+    .bridge {
+      padding-top: var(--sp-8);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: var(--fs-standfirst);
+      line-height: 1.4;
+      color: var(--ink);
+    }
+
+    /* ── Personal narrative ── */
+    .bio { padding-top: var(--sp-4); }
 
     .bio p {
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--text);
-      margin-bottom: 20px;
-      font-weight: 300;
+      font-size: var(--fs-body);
+      line-height: 1.8;
+      color: var(--ink);
+      font-weight: 400;
+      margin-bottom: var(--sp-3);
     }
-
     .bio p:last-child { margin-bottom: 0; }
 
     .bio em {
-      font-family: 'Lora', serif;
+      font-family: var(--serif);
       font-style: italic;
-      color: var(--accent);
-    }
-
-    /* ── Book section ── */
-    .book-section {
-      margin-bottom: 56px;
-    }
-
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
-    .book-card {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 24px 28px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .book-card:hover {
-      border-color: #c0c0b8;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    }
-
-    .book-icon {
-      font-size: 2rem;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-
-    .book-info .book-title {
-      font-family: 'Lora', serif;
-      font-size: 1.05rem;
       font-weight: 500;
-      margin-bottom: 4px;
+      color: var(--ink);
     }
 
-    .book-info .book-desc {
-      font-size: 0.85rem;
+    /* ── Closing zone (Writing · Find me · Footer) ── */
+    .book-section {
+      border-top: 1px solid var(--line);
+      padding-top: var(--sp-6);
+      margin-top: var(--sp-8);
+    }
+
+    .label + * { margin-top: var(--sp-3); }
+
+    .book-link {
+      display: inline-flex;
+      align-items: baseline;
+      gap: var(--sp-2);
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .book-title {
+      font-family: var(--serif);
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-size: 1.5rem;
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease;
+    }
+    .book-arrow { color: var(--blood); transition: transform 0.2s ease; }
+    .book-link:hover .book-title { color: var(--blood); }
+    .book-link:hover .book-arrow { transform: translateX(4px); }
+
+    .book-desc {
+      font-size: var(--fs-secondary);
       color: var(--muted);
-      font-weight: 300;
+      font-weight: 400;
+      margin-top: var(--sp-2);
     }
 
-    .book-arrow {
-      margin-left: auto;
-      color: var(--muted);
-      font-size: 1.1rem;
-      flex-shrink: 0;
-      transition: transform 0.2s ease;
-    }
+    .links-section { margin-top: var(--sp-6); }
 
-    .book-card:hover .book-arrow {
-      transform: translateX(3px);
-    }
+    .links { display: flex; gap: var(--sp-4); flex-wrap: wrap; }
 
-    /* ── Links ── */
-    .links-section { }
-
-    .links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .link-pill {
+    .link-item {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border: 1px solid var(--border);
-      border-radius: 100px;
+      gap: var(--sp-1);
       text-decoration: none;
-      color: var(--text);
-      font-size: 0.88rem;
-      font-weight: 400;
-      background: #fff;
-      transition: background 0.2s ease, border-color 0.2s ease;
+      color: var(--ink);
+      font-size: var(--fs-secondary);
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: border-color 0.2s ease, color 0.2s ease;
     }
+    .link-item svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+    .link-item:hover { color: var(--blood); border-color: var(--blood); }
 
-    .link-pill:hover {
-      background: var(--text);
-      color: #fff;
-      border-color: var(--text);
-    }
-
-    .link-pill svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-      flex-shrink: 0;
-    }
-
-    /* ── Footer ── */
     .footer {
-      margin-top: 80px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-align: center;
+      margin-top: var(--sp-6);
+      padding-top: var(--sp-3);
+      border-top: 1px solid var(--line);
+      font-size: var(--fs-small);
+      color: var(--faint);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Motion: restrained reveal (progressive enhancement) ── */
+    html.js [data-reveal] { opacity: 0; transform: translateY(10px); }
+    html.js [data-reveal].in {
+      opacity: 1; transform: none;
+      transition: opacity 0.7s cubic-bezier(.2,.6,.2,1), transform 0.7s cubic-bezier(.2,.6,.2,1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html.js [data-reveal] { opacity: 1; transform: none; }
     }
 
     /* ── Responsive ── */
-    @media (max-width: 520px) {
-      .container { padding: 48px 0 72px; }
-      .hero-inner { flex-direction: column; gap: 24px; }
-      .photo-wrap { width: 96px; height: 96px; }
-      .hero-text h1 { font-size: 1.6rem; }
-      .bio p { font-size: 1rem; }
+    @media (max-width: 620px) {
+      body { padding: 0 var(--sp-3); }
+      .container { padding: var(--sp-6) 0 var(--sp-7); }
+      .masthead { flex-direction: column-reverse; align-items: flex-start; gap: var(--sp-3); }
+      .portrait { width: 76px; height: 76px; }
+      .lede { padding-top: var(--sp-5); }
+      .proof, .synthesis { margin-top: var(--sp-6); }
+      .cta { font-size: 1.25rem; }
+      .bridge { padding-top: var(--sp-7); }
+      .book-section { margin-top: var(--sp-7); }
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- Hero -->
-    <div class="hero">
-      <div class="hero-inner">
-        <div class="photo-wrap">
-          <img src="photo.jpg" alt="Alexander Strunkin" />
-        </div>
-        <div class="hero-text">
-          <h1>Alexander Strunkin</h1>
-          <p class="tagline">Founder &nbsp;·&nbsp; Immigrant &nbsp;·&nbsp; Builder &nbsp;·&nbsp; Collector of Stories</p>
-        </div>
+    <!-- Masthead: name · tagline · portrait -->
+    <header class="masthead">
+      <div class="masthead-id">
+        <h1>Alexander Strunkin</h1>
+        <p class="tagline">Founder &nbsp;·&nbsp; Immigrant &nbsp;·&nbsp; Builder &nbsp;·&nbsp; Collector of Stories</p>
       </div>
+      <div class="portrait">
+        <img src="photo.jpg" alt="Alexander Strunkin" />
+      </div>
+    </header>
+
+    <!-- Lede: the 0→1 opening as standfirst -->
+    <section class="lede">
+      <p class="standfirst">
+        I've run <span class="hl">0→1</span> more than a hundred times — as a founder, as an early employee, inside Indeed's incubator, and leading a Y Combinator Startup School batch. Enough reps to have developed real taste for what customers actually want, and the judgment to kill what they don't.
+      </p>
+      <p>
+        Five startups as founder or early employee. A dozen more backed. Products taken from nothing to scale at both startups and enterprises like Indeed and Microsoft.
+      </p>
+    </section>
+
+    <!-- Proof: light bullet list -->
+    <ul class="proof">
+      <li data-reveal><span class="proof-name">Tennr</span> — Founding PM at the fastest-growing AI healthtech startup in the US.</li>
+      <li data-reveal><span class="proof-name">Deako</span> — Co-founder &amp; CPO. Smart lighting now pre-installed in ~1 in 7 new US homes.</li>
+      <li data-reveal><span class="proof-name">Limeade</span> — Early engineer → Director of Engineering. Company went public.</li>
+      <li data-reveal><span class="proof-name">GradeEdge</span> — Co-founder. Acquired.</li>
+      <li data-reveal><span class="proof-name">Indeed</span> — Led 10 product teams across Seattle and Tokyo testing new bets; the winners were absorbed into core lines or spun out as standalone businesses inside an $8B-by-revenue company.</li>
+      <li data-reveal><span class="proof-name">Y Combinator</span> — One of a small group of alumni chosen to lead a Startup School batch.</li>
+    </ul>
+
+    <!-- Synthesis -->
+    <p class="synthesis">
+      Engineering depth, hands-on leadership, and range across early-stage, scaled enterprise, and venture. It's what lets me walk into ambiguity and find the highest-leverage problem fast.
+    </p>
+
+    <!-- CTA -->
+    <div class="cta-row">
+      <a class="cta" href="mailto:alexanderstr@gmail.com">Building something? Let's talk <span class="arrow">→</span></a>
     </div>
 
-    <!-- Bio -->
-    <div class="bio">
+    <!-- Bridge -->
+    <p class="bridge">That's the resume. Here's the rest of it.</p>
+
+    <!-- Personal narrative -->
+    <section class="bio" id="story">
       <p>
         I moved to the U.S. from Russia at 19 with $2,000, one contact, and a stubborn belief that life could be bigger than the world I came from.
       </p>
@@ -290,42 +404,34 @@
       <p>
         My story is just one small version of that dream. And despite all of America's imperfections, <em>I still believe it is one of the best places on earth for immigrants, entrepreneurs, builders, and anyone stubborn enough to believe that life can become bigger than where it began.</em>
       </p>
-    </div>
+    </section>
 
-    <!-- Book -->
+    <!-- Writing -->
     <div class="book-section">
-      <p class="section-label">Writing</p>
-      <a class="book-card" href="https://docs.google.com/document/d/1Jy-8cNfmVY2sCwWAO5MyrNbktfVkBnsu93DLdTW89cA/edit?usp=sharing" target="_blank" rel="noopener">
-        <div class="book-icon">📖</div>
-        <div class="book-info">
-          <div class="book-title">Life Stories</div>
-          <div class="book-desc">Essays on immigration, ambition, friendship, reinvention, and the strange turns that make a life.</div>
-        </div>
-        <div class="book-arrow">→</div>
+      <p class="label">Writing</p>
+      <a class="book-link" href="https://docs.google.com/document/d/1Jy-8cNfmVY2sCwWAO5MyrNbktfVkBnsu93DLdTW89cA/edit?usp=sharing" target="_blank" rel="noopener">
+        <span class="book-title">Life Stories</span>
+        <span class="book-arrow">→</span>
       </a>
+      <p class="book-desc">Essays on immigration, ambition, friendship, reinvention, and the strange turns that make a life.</p>
     </div>
 
-    <!-- Social links -->
+    <!-- Find me -->
     <div class="links-section">
-      <p class="section-label">Find me</p>
+      <p class="label">Find me</p>
       <div class="links">
-
-        <!-- LinkedIn -->
-        <a class="link-pill" href="https://www.linkedin.com/in/alexanderstr/" target="_blank" rel="noopener">
+        <a class="link-item" href="https://www.linkedin.com/in/alexanderstr/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
           </svg>
           LinkedIn
         </a>
-
-        <!-- Instagram -->
-        <a class="link-pill" href="https://www.instagram.com/alexanderstrunkin/" target="_blank" rel="noopener">
+        <a class="link-item" href="https://www.instagram.com/alexanderstrunkin/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
           </svg>
           Instagram
         </a>
-
       </div>
     </div>
 
@@ -334,5 +440,23 @@
     </div>
 
   </div>
+
+  <script>
+    // Restrained scroll reveal — progressive enhancement
+    document.documentElement.classList.add('js');
+    (function () {
+      var items = document.querySelectorAll('[data-reveal]');
+      if (!('IntersectionObserver' in window) || !items.length) {
+        items.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+      items.forEach(function (el, i) { el.style.transitionDelay = (i % 6 * 60) + 'ms'; io.observe(el); });
+    })();
+  </script>
 </body>
 </html>

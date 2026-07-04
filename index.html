@@ -245,7 +245,6 @@
       display: inline-flex;
       align-items: baseline;
       gap: var(--sp-2);
-      text-decoration: none;
       color: var(--ink);
     }
     .book-title {
@@ -254,11 +253,19 @@
       font-weight: 500;
       font-size: 1.5rem;
       letter-spacing: -0.01em;
-      transition: color 0.2s ease;
     }
-    .book-arrow { color: var(--blood); transition: transform 0.2s ease; }
-    .book-link:hover .book-title { color: var(--blood); }
-    .book-link:hover .book-arrow { transform: translateX(4px); }
+    .book-link.is-disabled .book-title { color: var(--muted); }
+    .book-soon {
+      font-family: var(--sans);
+      font-size: var(--fs-label);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
 
     .book-desc {
       font-size: var(--fs-secondary);
@@ -409,10 +416,10 @@
     <!-- Writing -->
     <div class="book-section">
       <p class="label">Writing</p>
-      <a class="book-link" href="https://docs.google.com/document/d/15FT9aEHZ6-3uwUyMYgWsLOPzobkQUGuGatZnCqWnyOU/edit?tab=t.0" target="_blank" rel="noopener">
+      <div class="book-link is-disabled">
         <span class="book-title">Life Stories</span>
-        <span class="book-arrow">→</span>
-      </a>
+        <span class="book-soon">Coming soon</span>
+      </div>
       <p class="book-desc">Essays on immigration, ambition, friendship, reinvention, and the strange turns that make a life.</p>
     </div>
 

@@ -176,6 +176,82 @@
       letter-spacing: -0.01em;
     }
 
+    .deako-demo {
+      margin-top: var(--sp-1);
+    }
+
+    .deako-demo summary {
+      width: fit-content;
+      color: var(--blood);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .deako-demo figure {
+      margin: var(--sp-2) 0 0;
+      padding: var(--sp-2);
+      border: 1px solid var(--line);
+    }
+
+    .deako-demo-title {
+      display: block;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: var(--fs-proof);
+      font-weight: 500;
+    }
+
+    .deako-demo-player {
+      margin: var(--sp-2) 0 var(--sp-1);
+    }
+
+    .deako-demo-preview {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: var(--ink);
+      color: white;
+    }
+
+    .deako-demo-preview img, .deako-demo-preview span {
+      grid-area: 1 / 1;
+    }
+
+    .deako-demo-preview img, .deako-demo-player iframe {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+    }
+
+    .deako-demo-preview img {
+      object-fit: cover;
+    }
+
+    .deako-demo-preview span {
+      z-index: 1;
+      padding: var(--sp-1) var(--sp-2);
+      border-radius: 4px;
+      background: var(--ink);
+      font-weight: 600;
+    }
+
+    .deako-demo a {
+      color: var(--blood);
+      text-underline-offset: 0.2em;
+    }
+
+    .deako-demo .deako-demo-preview {
+      color: white;
+      text-decoration: none;
+    }
+
+    .deako-demo-preview:focus-visible {
+      outline: 2px solid var(--blood);
+      outline-offset: 3px;
+    }
+
     /* ── Synthesis + CTA ── */
     .synthesis {
       margin-top: var(--sp-7);
@@ -352,8 +428,35 @@
 
     <!-- Proof: light bullet list -->
     <ul class="proof">
+      <li data-reveal>
+        <span class="proof-name">GreenLite</span> — In <strong>eight weeks</strong>, I took the Jurisdiction Complexity Index
+        from idea to an enterprise deal covering all new U.S. locations for the world’s largest veterinary care network.
+        I ran customer discovery and wrote the code myself, partnering with sales to close the deal.
+        <strong>Some of the largest companies in the U.S. now use the index to decide where and when to build.</strong>
+      </li>
       <li data-reveal><span class="proof-name">Tennr</span> — Founding PM at the fastest-growing AI healthtech startup in the US.</li>
-      <li data-reveal><span class="proof-name">Deako</span> — Co-founder &amp; CPO. Smart lighting now pre-installed in ~1 in 7 new US homes.</li>
+      <li data-reveal>
+        <span class="proof-name">Deako</span> — Co-founder &amp; CPO. Smart lighting now pre-installed in roughly 1 in 7 new single-family homes in the U.S.
+        <details class="deako-demo">
+          <summary>Watch my 2016 demo</summary>
+          <figure>
+            <figcaption>
+              <strong class="deako-demo-title">The Power of the Right MVP</strong>
+              We built the Deako prototype in this 2016 demo in just over a month, including the hardware,
+              firmware, software, and Bluetooth Low Energy (BLE) mesh connectivity.
+              That prototype led to a successful fundraise and the launch of a <strong>$1.5M+ beta program</strong>.
+              Beta customers kept every single unit. <strong>Zero returns.</strong>
+            </figcaption>
+            <div class="deako-demo-player">
+              <a class="deako-demo-preview" href="https://www.youtube.com/watch?v=Zo_KhEV12bs">
+                <img src="https://i.ytimg.com/vi/Zo_KhEV12bs/hqdefault.jpg" width="480" height="360" loading="lazy" alt="" />
+                <span>Play the demo</span>
+              </a>
+            </div>
+            <a href="https://www.youtube.com/watch?v=Zo_KhEV12bs">Watch on YouTube</a>
+          </figure>
+        </details>
+      </li>
       <li data-reveal><span class="proof-name">Limeade</span> — Early engineer → Director of Engineering. Company went public.</li>
       <li data-reveal><span class="proof-name">GradeEdge</span> — Co-founder. Acquired.</li>
       <li data-reveal><span class="proof-name">Indeed</span> — Led 10 product teams across Seattle and Tokyo testing new bets; the winners were absorbed into core lines or spun out as standalone businesses inside an $8B-by-revenue company.</li>
@@ -464,6 +567,21 @@
       }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
       items.forEach(function (el, i) { el.style.transitionDelay = (i % 6 * 60) + 'ms'; io.observe(el); });
     })();
+  </script>
+  <script>
+    const demoPreview = document.querySelector('.deako-demo-preview');
+    demoPreview.addEventListener('click', function (event) {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+
+      const player = document.createElement('iframe');
+      player.src = 'https://www.youtube-nocookie.com/embed/Zo_KhEV12bs?autoplay=1';
+      player.title = 'Deako prototype demo from 2016';
+      player.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      player.allowFullscreen = true;
+      demoPreview.replaceWith(player);
+      player.focus();
+    });
   </script>
   <!-- Cloudflare Web Analytics -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a780b32df2d24799b7b70cb63c971e49"}'></script>
